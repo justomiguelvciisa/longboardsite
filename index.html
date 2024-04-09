@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longboards Page</title>
+    <style>
+        /* Estilos para ocultar las secciones */
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos para la barra de navegación */
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Estilos para la galería */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .carousel {
+            max-width: 80%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Inicio</a></li>
+            <li><a href="#" onclick="showSection('gallery')">Galería</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de inicio -->
+    <section id="home">
+        <div style="background-image: url('main.jpg'); height: 80vh; background-size: cover; display: flex; justify-content: center; align-items: center;">
+            <div style="background-color: white; padding: 20px;">
+            	<h1>Bienvenido a la página de Longboards</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de galería -->
+    <section id="gallery" class="hidden">
+        <div class="gallery">
+            <div class="carousel">
+                <img src="l1.png" class="active">
+                <img src="l2.jpg">
+                <img src="l3.jpg">
+                <img src="l4.jpg">
+                <img src="l5.png">
+                <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de contacto -->
+    <section id="contact" class="hidden">
+        <div style="text-align: center;">
+            <h2>Contacto</h2>
+            <form>
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="message">Mensaje:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Función para mostrar la sección seleccionada y ocultar las demás
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+
+        // Funciones para el carrusel de la galería
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function prevSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
